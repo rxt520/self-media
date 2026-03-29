@@ -1,0 +1,7 @@
+# 每行一个替换规则
+# 格式: 原词 => 修正词
+
+扣子空间 => Coze Space
+扣子罗盘 => Coze Compass
+MCP server => MCP Server
+扣子 => Coze

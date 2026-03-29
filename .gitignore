@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+private/
+Thumbs.db
+.DS_Store
+
+# Runtime outputs
+scripts/video-editing/web_runs/
+scripts/video-editing/smoke/out/
+
+# Generated media artifacts
+*.final.mp4
+*.auto.srt
+*.edit.srt
+*.ass

@@ -1,53 +1,60 @@
-﻿# Video Cut Skills For Codex
+# Video Cut Skills For Codex
 
-杩欎釜鐩綍鏄潰鍚?Codex 鐨勬湰鍦?skill 鍖咃紝涓嶅鐢?`C:\custom\project1\ideas\videocut-skills` 鐨勫師濮嬬粍缁囨柟寮忋€?
-杩欓噷鐨?skill 缁熶竴璋冪敤锛?
+这个目录是面向 Codex 的本地 skill 包，不复用 `C:\custom\project1\ideas\videocut-skills` 的原始组织方式。
+
+这里的 skill 统一调用：
+
 - [video_postprocess.py](C:/custom/project1/ideas/self-media/scripts/video-editing/video_postprocess.py)
 
-鏍稿績鑴氭湰鐩綍锛?
+核心脚本目录：
+
 - `C:\custom\project1\ideas\self-media\scripts\video-editing`
 
-## 褰撳墠 Skill
+## 当前 Skill
 
 - `transcribing-talking-head-subtitles`
-  - 浠庤棰戠敓鎴愬彲缂栬緫 `.auto.srt`
+  - 从视频生成可编辑 `.auto.srt`
 - `rendering-talking-head-video`
-  - 璇诲彇淇鍚庣殑 `.srt` 杈撳嚭 `.final.mp4`
+  - 读取修正后的 `.srt` 输出 `.final.mp4`
 - `running-talking-head-postprocess`
-  - 缁勭粐瀹屾暣宸ヤ綔娴?- `dictionary-correcting-subtitles`
-  - 鐢ㄦ湳璇瘝鍏告壒閲忎慨姝ｅ瓧骞?- `reviewing-subtitles-in-browser`
-  - 璧锋湰鍦扮綉椤碉紝杈圭湅瑙嗛杈规敼瀛楀箷鏂囧瓧
+  - 组织完整工作流
+- `dictionary-correcting-subtitles`
+  - 用术语词典批量修正字幕
+- `reviewing-subtitles-in-browser`
+  - 起本地网页，边看视频边改字幕文字
 
-## 鎺ㄨ崘浣跨敤鏂瑰紡
+## 推荐使用方式
 
-1. 鍏堢敤 `transcribing-talking-head-subtitles`
-2. 淇 `.srt`
-3. 鍐嶇敤 `rendering-talking-head-video`
+1. 先用 `transcribing-talking-head-subtitles`
+2. 修正 `.srt`
+3. 再用 `rendering-talking-head-video`
 
-濡傛灉鐢ㄦ埛鍙鈥滄妸杩欐潯鍙ｆ挱瑙嗛澶勭悊瀹屸€濓紝浼樺厛浣跨敤 `running-talking-head-postprocess`銆?
-## 甯哥敤缁勫悎
+如果用户只说“把这条口播视频处理完”，优先使用 `running-talking-head-postprocess`。
 
-### 缁勫悎 1锛氭爣鍑嗘祦绋?
+## 常用组合
+
+### 组合 1：标准流程
+
 1. `transcribing-talking-head-subtitles`
 2. `dictionary-correcting-subtitles`
 3. `reviewing-subtitles-in-browser`
 4. `rendering-talking-head-video`
 
-### 缁勫悎 2锛氬揩閫熸祦绋?
+### 组合 2：快速流程
+
 1. `transcribing-talking-head-subtitles`
-2. 鐩存帴鎵嬫敼 `.srt`
+2. 直接手改 `.srt`
 3. `rendering-talking-head-video`
 
-## 杈呭姪鑴氭湰
+## 辅助脚本
 
 - [apply_dictionary.py](C:/custom/project1/ideas/self-media/skills/video-editing/dictionary-correcting-subtitles/apply_dictionary.py)
 - [subtitle_review_server.py](C:/custom/project1/ideas/self-media/skills/video-editing/reviewing-subtitles-in-browser/subtitle_review_server.py)
 
-## 鍚庣画澧炲己鏂瑰悜
+## 后续增强方向
 
-鍚庣画鍙互缁х画寰€杩欓噷琛ワ細
+后续可以继续往这里补：
 
-- 鍘诲仠椤?skill
-- 绮剧‘鍓彛璇?skill
-- 鎵归噺澶勭悊 skill
-
+- 去停顿 skill
+- 精确剪口播 skill
+- 批量处理 skill

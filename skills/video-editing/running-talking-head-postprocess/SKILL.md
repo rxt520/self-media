@@ -1,4 +1,4 @@
-﻿---
+---
 name: running-talking-head-postprocess
 description: Use when a user needs the full local workflow for a talking-head video from subtitle draft generation through corrected burn-in export
 ---
@@ -55,7 +55,7 @@ python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\inpu
 Optional highlight example:
 
 ```powershell
-python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\input.edit.srt' --out-dir 'C:\path\to\output' --highlight '娴佺▼,鍓緫'
+python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\input.edit.srt' --out-dir 'C:\path\to\output' --highlight '流程,剪辑'
 ```
 
 ## Verification Checklist
@@ -73,4 +73,3 @@ If the user wants stronger capabilities later, extend the workflow in this order
 2. local subtitle review web UI
 3. pause filler removal
 4. segment-based precision cutting
-

@@ -1,4 +1,4 @@
-﻿---
+---
 name: transcribing-talking-head-subtitles
 description: Use when a talking-head video needs editable subtitles generated from speech before review, correction, or final burn-in
 ---
@@ -13,7 +13,7 @@ Core rule: this skill stops at `.auto.srt`. It does not burn subtitles into vide
 
 ## When to Use
 
-- The user says "鍔犲瓧骞?, "杞啓瀛楀箷", "鐢熸垚 srt", or "鍏堝嚭瀛楀箷绋?
+- The user says "加字幕", "转写字幕", "生成 srt", or "先出字幕稿"
 - The input is a local video file
 - The user wants to manually correct subtitle text before rendering
 
@@ -61,4 +61,3 @@ Minimum verification after running:
 - Confirm the command exits with code `0`
 - Confirm `<out-dir>\<video-stem>.auto.srt` exists
 - If the source video is silent, expect an empty or near-empty subtitle file
-

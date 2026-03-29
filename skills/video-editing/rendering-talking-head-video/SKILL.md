@@ -1,4 +1,4 @@
-﻿---
+---
 name: rendering-talking-head-video
 description: Use when a talking-head video already has a corrected subtitle file and needs a final burned-in export with fixed style and playback speed
 ---
@@ -13,10 +13,10 @@ Core rule: rendering uses the project's fixed style defaults unless the user exp
 
 ## When to Use
 
-- The user says "鐑у綍瀛楀箷", "瀵煎嚭鎴愮墖", "鏈€缁堣棰?, or "娓叉煋"
+- The user says "烧录字幕", "导出成片", "最终视频", or "渲染"
 - A corrected `.srt` file already exists
 - The user wants the default style:
-  - `寰蒋闆呴粦`
+  - `微软雅黑`
   - white subtitles
   - yellow highlights
   - bottom-center placement
@@ -41,7 +41,7 @@ python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\inpu
 Render with highlighted terms:
 
 ```powershell
-python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\input.edit.srt' --out-dir 'C:\path\to\output' --highlight '娴佺▼,鍓緫,娴嬭瘯'
+python video_postprocess.py render 'C:\path\to\input.mp4' --srt 'C:\path\to\input.edit.srt' --out-dir 'C:\path\to\output' --highlight '流程,剪辑,测试'
 ```
 
 ## Expected Output
@@ -60,17 +60,12 @@ For `input.mp4`, the command writes:
 - placement: bottom center
 - speed: `1.25x`
 
-## Common Mistakes
-
-- Passing `.auto.srt` without reviewing it
-- Forgetting `--srt`
-- Assuming the skill changes style automatically without explicit instruction
-
 ## Verification
 
-Minimum verification after running:
+After render, confirm:
 
-- Confirm the command exits with code `0`
-- Confirm `<out-dir>\<video-stem>.ass` exists
-- Confirm `<out-dir>\<video-stem>.final.mp4` exists
+- the corrected `.srt` existed
+- the `.ass` file was generated
+- the `.final.mp4` file was generated
 
+If render fails because `ffmpeg` is unavailable, stop and surface that dependency issue.

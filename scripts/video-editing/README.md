@@ -1,50 +1,55 @@
-﻿# 鍙ｆ挱瑙嗛鍚庡鐞嗚剼鏈?
-杩欎釜鐩綍鎻愪緵涓€涓法骞冲彴鐨?Python CLI锛岀敤浜庡鐞嗗彛鎾棰戯細
+# 口播视频后处理脚本
 
-- 鑷姩杞啓鐢熸垚鍙紪杈戝瓧骞?- 璇诲彇淇鍚庣殑 `.srt`
-- 鐢熸垚甯︽牱寮忕殑 `.ass`
-- 鐢?`ffmpeg` 鎸?`1.25x` 鍊嶉€熺儳褰曞瓧骞曡緭鍑烘渶缁堟垚鐗?
-## 鐩綍缁撴瀯
+这个目录提供一个跨平台 Python CLI，用于处理口播视频：
+
+- 自动转写生成可编辑字幕
+- 读取修正后的 `.srt`
+- 生成带样式的 `.ass`
+- 用 `ffmpeg` 按 `1.25x` 倍速烧录字幕并输出最终成片
+
+## 目录结构
 
 ```text
 scripts/video-editing/
-鈹溾攢鈹€ video_postprocess.py
-鈹溾攢鈹€ requirements.txt
-鈹溾攢鈹€ README.md
-鈹溾攢鈹€ video_postprocess/
-鈹?  鈹溾攢鈹€ __init__.py
-鈹?  鈹溾攢鈹€ ass_writer.py
-鈹?  鈹溾攢鈹€ ffmpeg_ops.py
-鈹?  鈹溾攢鈹€ paths.py
-鈹?  鈹溾攢鈹€ srt_utils.py
-鈹?  鈹斺攢鈹€ transcribe.py
-鈹斺攢鈹€ tests/
+├── video_postprocess.py
+├── requirements.txt
+├── README.md
+├── video_postprocess/
+│   ├── __init__.py
+│   ├── ass_writer.py
+│   ├── ffmpeg_ops.py
+│   ├── paths.py
+│   ├── srt_utils.py
+│   └── transcribe.py
+└── tests/
 ```
 
-## 渚濊禆
+## 依赖
 
-绯荤粺渚濊禆锛?
+系统依赖：
+
 - Python 3.10+
 - ffmpeg
 
-Python 渚濊禆锛?
+Python 依赖：
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## 浣跨敤鏂瑰紡
+## 使用方式
 
-### 1. 鑷姩鐢熸垚瀛楀箷鑽夌
+### 1. 自动生成字幕草稿
 
 ```bash
 python video_postprocess.py transcribe input.mp4 --out-dir output
 ```
 
-榛樿浼氱敓鎴愶細
+默认会生成：
 
 - `output/input.auto.srt`
 
-鍙€夊弬鏁帮細
+可选参数：
 
 ```bash
 python video_postprocess.py transcribe input.mp4 \
@@ -54,46 +59,52 @@ python video_postprocess.py transcribe input.mp4 \
   --device auto
 ```
 
-璇存槑锛?
-- `language` 榛樿 `zh`
-- `model-size` 榛樿 `small`
-- `device` 榛樿 `auto`锛屽綋鍓嶄細鍥炶惤鍒?CPU
+说明：
 
-### 2. 淇瀛楀箷
+- `language` 默认 `zh`
+- `model-size` 默认 `small`
+- `device` 默认 `auto`，当前会回落到 CPU
 
-灏嗚嚜鍔ㄧ敓鎴愮殑瀛楀箷浜哄伐淇鍚庝繚瀛樻垚锛?
+### 2. 修正字幕
+
+将自动生成的字幕人工修正后保存成：
+
 - `output/input.edit.srt`
 
-浣犱篃鍙互鐢ㄤ换鎰忚矾寰勶紝鍙鍦ㄦ覆鏌撴椂閫氳繃 `--srt` 鎸囧畾鍗冲彲銆?
-### 3. 娓叉煋鏈€缁堣棰?
+你也可以用任意路径，只要在渲染时通过 `--srt` 指定即可。
+
+### 3. 渲染最终视频
+
 ```bash
 python video_postprocess.py render input.mp4 --srt output/input.edit.srt --out-dir output
 ```
 
-榛樿浼氱敓鎴愶細
+默认会生成：
 
 - `output/input.ass`
 - `output/input.final.mp4`
 
-鍙€夐珮浜瘝锛?
+可选高亮词：
+
 ```bash
 python video_postprocess.py render input.mp4 \
   --srt output/input.edit.srt \
   --out-dir output \
-  --highlight "娴佺▼,鍓緫,娴嬭瘯"
+  --highlight "流程,剪辑,测试"
 ```
 
-## 榛樿瀛楀箷鏍峰紡
+## 默认字幕样式
 
-- 瀛椾綋锛歚寰蒋闆呴粦`
-- 涓诲瓧骞曪細鐧借壊
-- 楂樹寒璇嶏細榛勮壊
-- 浣嶇疆锛氬簳閮ㄥ眳涓?- 鑳屾櫙锛欰SS 鏍峰紡搴曡壊
-- 鍊嶉€燂細`1.25x`
+- 字体：`微软雅黑`
+- 主字幕：白色
+- 高亮词：黄色
+- 位置：底部居中
+- 背景：ASS 样式底色
+- 倍速：`1.25x`
 
-## 杈撳嚭鏂囦欢
+## 输出文件
 
-杈撳叆瑙嗛 `clip.mp4` 鏃讹紝杈撳嚭鐩綍榛樿浣跨敤杩欎簺鏂囦欢鍚嶏細
+输入视频 `clip.mp4` 时，输出目录默认使用这些文件名：
 
 - `clip.auto.srt`
 - `clip.edit.srt`
@@ -101,15 +112,17 @@ python video_postprocess.py render input.mp4 \
 - `clip.final.mp4`
 - `tmp/`
 
-## 娴嬭瘯
+## 测试
 
-杩愯鍏ㄩ儴娴嬭瘯锛?
+运行全部测试：
+
 ```bash
 pytest -q
 ```
 
-## 璇存槑
+## 说明
 
-- `transcribe` 渚濊禆 `faster-whisper`
-- `render` 渚濊禆 `ffmpeg`
-- 濡傛灉 `faster-whisper` 鏈畨瑁咃紝杞啓闃舵浼氱洿鎺ユ姤閿?- 濡傛灉 `ffmpeg` 涓嶅湪 PATH 涓紝杞啓鍜屾覆鏌撻兘浼氬け璐?
+- `transcribe` 依赖 `faster-whisper`
+- `render` 依赖 `ffmpeg`
+- 如果 `faster-whisper` 未安装，转写阶段会直接报错
+- 如果 `ffmpeg` 不在 PATH 中，转写和渲染都会失败

@@ -10,6 +10,12 @@
 - `docs/`: 方法论、规则和规划文档
 - `private/`: 本地工作资料，默认由 git 忽略
 
+## 从哪里开始
+
+- 剪辑和字幕后处理：看 `scripts/video-editing/`，对应的本地 skill 在 `skills/video-editing/`
+- 口播文案生成：看 `skills/script-writing/`，规则和方法论在 `docs/rules/` 与 `docs/methodology/`
+- 口播模板和结构参考：看 `templates/`
+
 ## 快速开始
 
 1. 安装 Python 3.10+ 和 `ffmpeg`

@@ -7,9 +7,7 @@ private/
 Thumbs.db
 .DS_Store
 
-# Runtime outputs before and after the repository move
-script/web_runs/
-script/smoke/out/
+# Runtime outputs
 scripts/video-editing/web_runs/
 scripts/video-editing/smoke/out/
 

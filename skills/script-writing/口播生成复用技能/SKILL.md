@@ -1,192 +1,101 @@
-# 自媒体口播生成复用技能
+---
+name: douyin-script-master
+description: Use when another agent needs to generate or batch-produce Douyin talking-head scripts for creators using AI to improve efficiency and follower growth, with review roles, risk control, and rewrite loops.
+---
 
-## 适用场景
+# Douyin Script Master
 
-当其他 agent 需要继续生成抖音真人口播脚本，且目标人群仍然是：
+## Overview
 
-`想做自媒体，并希望用 AI 辅助提效和提升关注度的真人口播博主`
+This is the single entry skill for Douyin talking-head script generation in this project.
 
-直接按本技能执行。
+Do not treat old batch files as the primary rule source. Use the companion files in this folder as the authoritative working set for generation, review, risk control, and rewrite.
 
-## 必读文件
+## When to Use
 
-开始前必须按顺序读取：
+- Another agent needs to generate one or more Douyin talking-head scripts
+- The target account is a real-person creator using AI for writing or editing assistance
+- The goal is not just plays, but stronger follow reasons and follower growth
+- The workflow needs multi-role review, platform risk control, and rewrite loops
 
-1. `C:\custom\project1\ideas\self-media\docs\rules\抖音口播脚本生成规则.md`
-2. `C:\custom\project1\ideas\self-media\docs\methodology\规则迭代结论.md`
-3. `C:\custom\project1\ideas\self-media\private\drafts\正式可用口播脚本-第1批.md`
-4. `C:\custom\project1\ideas\self-media\docs\methodology\给其他会话的调用说明.md`
+Do not use this skill for subtitle generation, video rendering, or post-processing. Those belong to `skills/video-editing`.
 
-## 固定边界
+## Required Companion Files
 
-- 真人出镜口播
-- AI 只能用于写稿辅助、结构优化、剪辑提效
-- 不要写成 AI 全自动替代真人判断
-- 目标优先级是：停留 > 听完 > 收藏/评论 > 关注
-- 但最终脚本必须能解释“为什么值得长期关注你”
+Read these files in this folder before writing scripts:
 
-## 选题优先级
+1. `rule-pack.md`
+2. `review-roles.md`
+3. `risk-control.md`
+4. `scoring-loop.md`
+5. `prompt-template.md`
 
-优先从这 3 类切口里选：
+## Fixed Target
 
-1. AI 剪辑提效
-2. 账号聚焦
-3. 稳定输出
+- Core audience: creators who want to build self-media accounts and use AI to improve efficiency and gain followers
+- Delivery style: real-person talking-head videos
+- AI boundary: AI helps with drafting, structuring, and editing efficiency; humans make the final judgment
+- Primary goal order: stop > finish > save/comment > follow
 
-谨慎使用：
+## Standard Workflow
 
-- 钩子结构
-- AI 写稿
+1. Lock one root problem for each script
+2. Choose one preferred angle from the rule pack
+3. Generate a full 1.5 minute script
+4. Run structure review
+5. Run Douyin risk review
+6. Run 12 audience-role reviews
+7. Run scoring review
+8. If any critical gate fails, rewrite only the failing parts and review again
 
-原因：
+## Review Topology
 
-- 这两类更容易做出播放感
-- 但更容易缺少长期关注理由
-- 如果必须写，结尾要明确“持续关注后会继续获得什么”
+If subagents are available, use this pattern per script:
 
-## 标准生成流程
+- 1 generator
+- 1 structure reviewer
+- 1 risk reviewer
+- 12 audience-role reviewers
+- 1 scoring reviewer
 
-### 第一步：锁定一个根问题
+If subagents are not available, simulate the same review order sequentially in one session.
 
-每条脚本只允许 1 个根问题。
+## Hard Gates
 
-可用问题示例：
+A script is not formally usable unless all of the following are true:
 
-- 为什么发不稳
-- 为什么用了 AI 还是没人记住你
-- 为什么剪辑很慢
-- 为什么主页看不懂
+- structure review: pass
+- risk review: pass
+- audience-role positive count: at least 8 of 12
+- final score: at least 82 out of 100
 
-不要在同一条里同时解决“选题、写稿、剪辑、变现”四件事。
+## Rewrite Rule
 
-### 第二步：先写标题
+When a script fails:
 
-要求：
+- point to the exact broken rule
+- adjust only the failing section first
+- do not fully rewrite from scratch unless the root problem itself is wrong
+- re-run the failed review stages
 
-- 主标题不超过 10 个字
-- 必须带副标题
-- 主标题要有明确判断或动作感
+## Output Expectation
 
-优先示例：
+Each delivered script should include:
 
-- 剪辑先减法
-- 主页先看懂
-- 别从零想
-- 主线先收紧
+- main title
+- subtitle
+- angle
+- duration
+- opening hook
+- full script
+- proof anchor
+- AI boundary sentence
+- closing CTA
 
-### 第三步：按 7 段结构展开
+## Final Note
 
-1. 开头钩子：第一句直接给判断或冲突
-2. 痛点展开：写出用户真实场景
-3. 反常识结论：给明确判断
-4. 核心方法：只给 1 个方法
-5. 步骤拆解：只写 1 到 3 步
-6. 证明或案例：至少 1 个硬锚点
-7. 结尾动作：只保留 1 个 CTA
+This skill is the main reusable entry for other agents in this project.
 
-### 第四步：补 AI 边界句
+If an agent asks which local skill to use for script generation, use:
 
-凡是 AI 写稿、AI 剪辑、AI 结构优化切口，步骤后固定补一句：
-
-`AI 辅助提效，最后怎么用、怎么改，还是你自己定。`
-
-### 第五步：补关注线索
-
-如果这条脚本希望建立关注理由，CTA 前必须单独放一句后续线索。
-
-优先写成陈述式：
-
-- 这条线我后面继续往下拆
-- 下一条我继续讲这个问题
-- 后面我接着拆它怎么落地
-
-## 强制通过线
-
-以下条件必须同时满足：
-
-1. 只有 1 个根问题
-2. 第一段直接进入判断，不寒暄
-3. 痛点段至少出现 1 个具体场景
-4. 方法只有 1 个
-5. 步骤不超过 3 个
-6. 证明段至少有 1 个硬锚点
-7. AI 内容有边界句
-8. CTA 只有 1 个
-9. 需要关注理由时，CTA 前有单独后续线索
-10. 结尾没有高风险导关导私信表达
-
-不满足任意 2 条，直接判定重写。
-
-## 硬锚点优先级
-
-证明段优先补这 4 类：
-
-1. 时间变化
-2. 数量变化
-3. 前后对比
-4. 具体执行场景
-
-优先写法：
-
-- 连续两周只讲一条主线
-- 最近 10 条内容先停掉不服务主线的
-- 单条剪辑时间从接近 2 小时压到 40 分钟左右
-- 新访客看主页前三屏更容易看懂账号在讲什么
-
-## 禁止表达
-
-禁止以下结尾或导向：
-
-- 你先关注
-- 评论区扣 XX
-- 我直接给你 XX
-- 喜欢记得点赞关注收藏转发
-- 私信我领资料
-- 100% 爆
-- 保证上热门
-- 肯定月入多少
-
-## 推荐结尾公式
-
-优先使用：
-
-`陈述式后续线索 + 收藏型 CTA`
-
-示例：
-
-`这套流程怎么继续拆到 30 天选题，我后面接着讲。这条你先存着。`
-
-## 输出格式
-
-```text
-主标题：
-副标题：
-切口：
-时长：
-开头钩子：
-
-完整版口播：
-
-证明锚点：
-AI边界句：
-结尾动作：
-字幕关键词：
-```
-
-## 执行建议
-
-- 如果是批量生成，优先围绕同一核心人群下的 6 个不同选题
-- 如果只求稳定过线，优先先跑 `AI 剪辑提效`
-- 如果追求“关注理由”更强，可以多跑 `稳定输出`
-- 如果脚本已经有播放感，但 reviewer 仍判弱，优先检查证明段和结尾线索，不要先改开头
-
-## 最后提醒
-
-`第1批 / 第2批` 只是交付分组，不是规则版本。
-
-真正要复用的是这 4 份文件：
-
-- `C:\custom\project1\ideas\self-media\docs\rules\抖音口播脚本生成规则.md`
-- `C:\custom\project1\ideas\self-media\docs\methodology\规则迭代结论.md`
-- `C:\custom\project1\ideas\self-media\private\drafts\正式可用口播脚本-第1批.md`
-- `C:\custom\project1\ideas\self-media\docs\methodology\给其他会话的调用说明.md`
+- `C:\custom\project1\ideas\self-media\skills\script-writing\口播生成复用技能\SKILL.md`

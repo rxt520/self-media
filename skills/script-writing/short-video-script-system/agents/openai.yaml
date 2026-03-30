@@ -1,0 +1,4 @@
+interface:
+  display_name: "Short Video Script System"
+  short_description: "Method for short-video positioning and script writing"
+  default_prompt: "Use $short-video-script-system to turn my topic into a positioning-aware short-video script."

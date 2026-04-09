@@ -8,7 +8,7 @@
 
 核心脚本目录：
 
-- `C:\custom\project1\ideas\self-media\scripts\video-editing`
+- `~/self-media/skills/video-editing/`
 
 ## 当前 Skill
 
